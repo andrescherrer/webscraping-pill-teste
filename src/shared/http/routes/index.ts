@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { productRoutes } from '@product/http/product.routes';
+import { productRoute } from '@product/http/product.routes';
 
 const routes = Router();
 
@@ -22,6 +22,6 @@ routes.get('/healthcheck', (request, response) => {
   }
 });
 
-routes.use('/product', productRoutes);
+routes.use('/product', productRoute);
 
 export { routes };

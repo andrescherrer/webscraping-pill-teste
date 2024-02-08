@@ -1,29 +1,26 @@
-import { Product } from '@product/entities/Product';
-import { Router } from 'express';
+import { ProductRepository } from '@product/repositories/ProductRepository';
+import { Request, Response, Router } from 'express';
 
-const productRoutes = Router();
+const productRoute = Router();
+const productRepository = new ProductRepository();
 
-const products: Product[] = [];
-
-productRoutes.get('/', (request, response) => {
-  return response.json(products);
-});
-
-productRoutes.post('/', (request, response) => {
+productRoute.post('/', (request: Request, response: Response) => {
   const { name, barcode, brand, image, price } = request.body;
-  const product = new Product();
-  Object.assign(product, {
+  const product = productRepository.create({
     name,
     barcode,
     brand,
     image,
     price,
-    created_at: new Date(),
   });
-
-  products.push(product);
 
   return response.status(201).json(product);
 });
 
-export { productRoutes };
+productRoute.get('/', (request: Request, response: Response) => {
+  const products = productRepository.findAll();
+
+  return response.json(products);
+});
+
+export { productRoute };
