@@ -7,7 +7,7 @@ routes.get('/', (request, response) => {
   return response.json({ message: 'OK!' });
 });
 
-routes.get('/heathcheck', (request, response) => {
+routes.get('/healthcheck', (request, response) => {
   const heathcheck = {
     uptime: process.uptime(),
     message: 'OK!',
