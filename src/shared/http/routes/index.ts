@@ -1,5 +1,5 @@
-import { AppError } from '@shared/errors/AppError';
 import { Router } from 'express';
+import { productRoutes } from '@product/http/product.routes';
 
 const routes = Router();
 
@@ -21,5 +21,7 @@ routes.get('/heathcheck', (request, response) => {
     response.status(503).send();
   }
 });
+
+routes.use('/product', productRoutes);
 
 export { routes };
